@@ -33,3 +33,27 @@ jobs:
     - name: Update Helm values
       run: |
         sed -i 's/tag:.*/tag: "${{ github.sha }}"/' helm/values.yaml
+    - name: Clone CD Repository
+      run: |
+       git clone https://${{ secrets.GIT_USERNAME }}:${{ secrets.CD_REPO_TOKEN }}@github.com/KvSanojKV/nginx-helm-CD.git
+    - name: Update Image Tag
+      run: |
+        sed -i 's/tag:.*/tag: "${{ github.sha }}"/' nginx-helm-CD/helm/values.yaml
+    - name: Update Image Tag
+      run: |
+       sed -i 's/tag:.*/tag: "${{ github.sha }}"/' nginx-helm-CD/helm/values.yaml
+    - name: Commit Changes
+      run: |
+       cd nginx-helm-CD
+
+       git config user.name "github-actions"
+       git config user.email "github-actions@github.com"
+
+       git add .
+
+       git commit -m "Update image to ${{ github.sha }}"
+
+    - name: Push Changes
+      run: |
+       cd nginx-helm-CD
+       git push

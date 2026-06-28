@@ -1,0 +1,11 @@
+replicaCount: 2
+
+nginx:
+  image: sanojkv/myapp-argocd-version
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 3000
+  nodePort: 30080

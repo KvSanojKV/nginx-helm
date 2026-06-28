@@ -30,3 +30,6 @@ jobs:
           -t sanojkv/nginx-helm:${{ github.sha }} .
         docker push sanojkv/nginx-helm:latest
         docker push sanojkv/nginx-helm:${{ github.sha }}
+    - name: Update Helm values
+      run: |
+        sed -i 's/tag:.*/tag: "${{ github.sha }}"/' helm/values.yaml

@@ -1,8 +1,8 @@
 replicaCount: 2
 
 nginx:
-  image: sanojkv/myapp-argocd-version
-  tag: latest
+  image: sanojkv/nginx-helm
+  tag: 1ef6995d601e8507d3cece7d7812e46cfa710330
   pullPolicy: IfNotPresent
 
 service:
